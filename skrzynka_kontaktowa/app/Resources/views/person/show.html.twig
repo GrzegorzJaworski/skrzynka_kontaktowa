@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Person</h1>
+    
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ person.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ person.name }}</td>
+            </tr>
+            <tr>
+                <th>Surname</th>
+                <td>{{ person.surname }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ person.description }}</td>
+            </tr>
+             
+            {% if person.address != null %} 
+           
+            <tr>
+                <th>City</th>
+                <td>{{ person.address.city }}</td>
+            </tr>
+            <tr>
+                <th>Street</th>
+                <td>{{ person.address.street }}</td>
+            </tr>
+            <tr>
+                <th>House No.</th>
+                <td>{{ person.address.houseNo }}</td>
+            </tr>
+            <tr>
+                <th>Apartment No.</th>
+                <td>{{ person.address.apartmentNo }}</td>
+            </tr>
+            {% endif %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('person_index') }}">Back to the list</a>
+        </li>
+    </ul>
+            
+     {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}       
+{% endblock %}
