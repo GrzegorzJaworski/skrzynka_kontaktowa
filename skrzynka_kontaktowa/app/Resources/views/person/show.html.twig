@@ -2,13 +2,9 @@
 
 {% block body %}
     <h1>Person</h1>
-    
+
     <table>
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ person.id }}</td>
-            </tr>
             <tr>
                 <th>Name</th>
                 <td>{{ person.name }}</td>
@@ -21,36 +17,104 @@
                 <th>Description</th>
                 <td>{{ person.description }}</td>
             </tr>
-             
-            {% if person.address != null %} 
-           
-            <tr>
-                <th>City</th>
-                <td>{{ person.address.city }}</td>
-            </tr>
-            <tr>
-                <th>Street</th>
-                <td>{{ person.address.street }}</td>
-            </tr>
-            <tr>
-                <th>House No.</th>
-                <td>{{ person.address.houseNo }}</td>
-            </tr>
-            <tr>
-                <th>Apartment No.</th>
-                <td>{{ person.address.apartmentNo }}</td>
-            </tr>
-            {% endif %}
         </tbody>
     </table>
+    <a href="{{ path('modify_person', { 'id': person.id }) }}">edytuj</a>
+    {% if person.address != null %} 
+        <div>
+            {% for address in person.address %}
+                <hr>
+                <table>
+                    <tbody>
+                        <tr>
 
+                            <th>City</th>
+                            <td>{{ address.city }}</td>
+                        </tr>
+                        <tr>
+                            <th>Street</th>
+                            <td>{{ address.street }}</td>
+                        </tr>
+                        <tr>
+                            <th>House No.</th>
+                            <td>{{ address.houseNo }}</td>
+                        </tr>
+                        <tr>
+                            <th>Apartment No.</th>
+                            <td>{{ address.apartmentNo }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+<a href="{{ path('delete_address', { 'id': address.id }) }}">delete</a>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if person.phone != null %}
+        <div>
+            {% for phone in person.phone %}
+                <hr>
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>Numer</th>
+                            <td>{{ phone.number }}</td>
+                        </tr>
+                        <tr>
+                            <th>Typ</th>
+                            <td>{{ phone.type }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                        <a href="{{ path('delete_phone', { 'id': phone.id }) }}">delete</a>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if person.email != null %}
+        <div>
+            {% for email in person.email %}
+                <hr>
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>Email</th>
+                            <td>{{ email.address }}</td>
+                        </tr>
+                        <tr>
+                            <th>Typ</th>
+                            <td>{{ email.type }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                        <a href="{{ path('delete_email', { 'id': email.id }) }}">delete</a>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <hr>
     <ul>
         <li>
             <a href="{{ path('person_index') }}">Back to the list</a>
         </li>
     </ul>
-            
-     {{ form_start(form) }}
-    {{ form_widget(form) }}
-    {{ form_end(form) }}       
+    <hr>
+    <div> Dodaj nr. telefonu:<br>
+        {{ form_start(formPhone) }}
+        {{ form_widget(formPhone) }}
+        {{ form_end(formPhone) }}
+    </div>
+    <br>
+    <div> Dodaj adres: <br>
+        {{ form_start(formAddress) }}
+        {{ form_widget(formAddress) }}
+        {{ form_end(formAddress) }} 
+    </div>    
+    <br>
+    <div> Dodaj maila:<br>
+        {{ form_start(formEmail) }}
+        {{ form_widget(formEmail) }}
+        {{ form_end(formEmail) }}     
+    </div>
+
 {% endblock %}

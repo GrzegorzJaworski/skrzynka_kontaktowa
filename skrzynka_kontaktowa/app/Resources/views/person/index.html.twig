@@ -2,11 +2,12 @@
 
 {% block body %}
     <h1>People list</h1>
-
+    <a href="{{ path('new_person') }}">Dodaj osobę</a>
+    <br>
+    <br>
     <table>
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Name</th>
                 <th>Surname</th>
                 <th>Description</th>
@@ -14,23 +15,24 @@
             </tr>
         </thead>
         <tbody>
-        {% for person in people %}
-            <tr>
-                <td><a href="{{ path('person_show', { 'id': person.id }) }}">{{ person.id }}</a></td>
-                <td>{{ person.name }}</td>
-                <td>{{ person.surname }}</td>
-                <td>{{ person.description }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('person_show', { 'id': person.id }) }}">show</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
+            {% for person in people %}
+                <tr>
+                    <td><a href="{{ path('person_show', { 'id': person.id }) }}">{{ person.name }}</a></td>
+                    <td><a href="{{ path('person_show', { 'id': person.id }) }}">{{ person.surname }}</a></td>
+                    <td>{{ person.description }}</td>
+                    <td>
+                        <ul>
+                            <li>
+                                <a href="{{ path('modify_person', { 'id': person.id }) }}">edytuj</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('delete_person', { 'id': person.id }) }}">delete</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 
-    
 {% endblock %}
